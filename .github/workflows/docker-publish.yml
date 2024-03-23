@@ -11,13 +11,13 @@ name: Publish Docker image
 
 on:
   schedule:
-    - cron: '36 7 * * *'
+    - cron: "36 7 * * *"
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: ["v*.*.*"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   push_to_registry:
@@ -45,5 +45,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }},cvpfus/grok-akash:0.4
+          tags: ${{ steps.meta.outputs.tags }},cvpfus/grok-akash:0.5
           labels: ${{ steps.meta.outputs.labels }}
