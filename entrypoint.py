@@ -1,6 +1,8 @@
 import torch
 from transformers import AutoModelForCausalLM
 
+print("It will take 5-10 minutes to load checkpoints.")
+
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
     "hpcaitech/grok-1",
