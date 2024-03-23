@@ -12,9 +12,9 @@ RUN git clone https://github.com/hpcaitech/ColossalAI.git && \
     pip install -r requirements.txt --no-cache-dir && \
     mkdir -p hpcaitech/grok-1
 
-RUN wget https://github.com/xai-org/grok-1/raw/main/tokenizer.model
-
 WORKDIR /ColossalAI/examples/language/grok-1
+
+RUN wget https://github.com/xai-org/grok-1/raw/main/tokenizer.model
 
 ADD entrypoint.sh .
 ADD entrypoint.py .
