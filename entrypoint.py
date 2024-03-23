@@ -1,5 +1,6 @@
 import torch
 from transformers import AutoModelForCausalLM
+from sentencepiece import SentencePieceProcessor
 
 print("It will take 5-10 minutes to load checkpoints.")
 
