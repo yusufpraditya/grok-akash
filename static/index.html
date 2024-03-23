@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grok</title>
+    <link rel="stylesheet" href="/frontend/style.css" />
+    <script type="module" src="/frontend/script.js"></script>
+  </head>
+  <body>
+    <main>
+      <div class="form-block">
+        <h1>Grok</h1>
+        <p> Model:
+            <a href="https://huggingface.co/hpcai-tech/grok-1" rel="noreferrer" target="_blank" >Grok</a>
+        </p>
+        <div>
+          <form id="t5-form">
+              <div class="input-block">
+                <label for="t5-input">Text prompt:</label>
+                <textarea id="t5-input" rows="3">What is Artifical Intelligence?</textarea>
+              </div>
+              <button id="t5-submit">Submit</button>
+              <div>
+                <label for="t5-output">Results:</label>
+                <div id="t5-output"></div>
+              </div>
+            </form>
+        </div>
+      </div>
+
+    </main>
+  </body>
+</html>

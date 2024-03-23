@@ -1,7 +1,5 @@
 #!/bin/bash
 
-huggingface-cli download hpcai-tech/grok-1 --repo-type model --local-dir hpcaitech/grok-1 --local-dir-use-symlinks False
+huggingface-cli download hpcai-tech/grok-1 --repo-type model --local-dir /grok/grok-1 --local-dir-use-symlinks False
 
-pip install accelerate
-
-cd /ColossalAI/examples/language/grok-1 && gotty -w "python3 entrypoint.py"
+uvicorn main:app --host 0.0.0.0 --port 8080

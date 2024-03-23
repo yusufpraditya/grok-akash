@@ -1,26 +1,15 @@
 FROM ubuntu:22.04
 
-WORKDIR /
+WORKDIR /grok
 
 RUN apt-get update && \
-    apt-get install pip wget git -y
-
-RUN wget https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
-    tar -zxvf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
-    chmod +x gotty && \
-    rm -rf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
-    mv gotty /usr/local/bin/
-
-RUN git clone https://github.com/hpcaitech/ColossalAI.git && \
-    cd ColossalAI/examples/language/grok-1 && \
-    pip install -r requirements.txt --no-cache-dir && \
-    mkdir -p hpcaitech/grok-1
-
-WORKDIR /ColossalAI/examples/language/grok-1
+    apt-get install pip wget -y && \
+    mkdir grok-1
 
 RUN wget https://github.com/xai-org/grok-1/raw/main/tokenizer.model
 
-ADD entrypoint.sh .
-ADD entrypoint.py .
+COPY . /grok
+
+RUN pip install --no-cache-dir -r /grok/requirements.txt
 
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
