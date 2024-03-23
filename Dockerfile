@@ -1,10 +1,11 @@
-FROM ubuntu:22.04
+FROM python:3.9
 
 WORKDIR /grok
 
 RUN apt-get update && \
-    apt-get install pip wget -y && \
-    mkdir -p hpcaitech/grok-1
+    apt-get install wget -y
+
+RUN pip install --upgrade pip
 
 RUN wget https://github.com/xai-org/grok-1/raw/main/tokenizer.model
 
@@ -12,4 +13,4 @@ COPY . /grok
 
 RUN pip install --no-cache-dir -r /grok/requirements.txt
 
-ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
