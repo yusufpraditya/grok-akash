@@ -13,3 +13,5 @@ RUN cd examples/language/grok-1 && \
     mkdir -p hpcaitech/grok-1
 
 RUN wget https://github.com/xai-org/grok-1/raw/main/tokenizer.model
+
+RUN echo "test"
