@@ -4,4 +4,4 @@ huggingface-cli download hpcai-tech/grok-1 --repo-type model --local-dir hpcaite
 
 pip install accelerate
 
-cd /ColossalAI/examples/language/grok-1 && gotty -w "python entrypoint.py"
+cd /ColossalAI/examples/language/grok-1 && gotty -w "python3 entrypoint.py"
