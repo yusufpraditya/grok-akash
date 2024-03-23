@@ -1,3 +1,5 @@
+FROM scratch
+
 RUN apt-get update && \
     apt-get install pip wget git -y
 
