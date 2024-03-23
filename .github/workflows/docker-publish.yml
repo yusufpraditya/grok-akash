@@ -42,11 +42,8 @@ jobs:
         id: cuda-toolkit
         with:
           cuda: '12.3.2'
-        run: echo "Installed cuda version is: ${{steps.cuda-toolkit.outputs.cuda}}"
-          
-        run: echo "Cuda install location: ${{steps.cuda-toolkit.outputs.CUDA_PATH}}"
-          
-        run: nvcc -V
+      
+      - run: nvcc -V
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
