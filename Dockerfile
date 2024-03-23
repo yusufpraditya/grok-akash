@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04
 
 RUN apt-get update && \
     apt-get install pip wget git -y
