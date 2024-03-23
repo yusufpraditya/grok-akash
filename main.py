@@ -9,7 +9,7 @@ print("It will take 5-10 minutes to load checkpoints.")
 
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
-    "grok-1",
+    "hpcaitech/grok-1",
     trust_remote_code=True,
     device_map="auto",
     torch_dtype=torch.bfloat16,
