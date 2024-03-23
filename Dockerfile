@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM hpcaitech/colossalai:0.3.0
 
 WORKDIR /
 
@@ -6,11 +6,7 @@ RUN apt-get update && \
     apt-get install pip wget git -y
 
 RUN git clone https://github.com/hpcaitech/ColossalAI.git && \
-    cd ColossalAI && \
-    pip install --no-cache-dir . && \
-    BUILD_EXT=1 pip install --no-cache-dir .
-
-RUN cd examples/language/grok-1 && \
+    cd ColossalAI/examples/language/grok-1 && \
     pip install -r requirements.txt --no-cache-dir && \
     mkdir -p hpcaitech/grok-1
 
