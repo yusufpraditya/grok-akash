@@ -4,8 +4,11 @@ from sentencepiece import SentencePieceProcessor
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+import os
 
-print("It will take 5-10 minutes to load checkpoints.")
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
+
+print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
 
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
