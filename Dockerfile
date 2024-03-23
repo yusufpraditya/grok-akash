@@ -5,7 +5,11 @@ WORKDIR /
 RUN apt-get update && \
     apt-get install pip wget git -y
 
-RUN wget https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz && tar -zxvf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && chmod +x gotty && rm -rf gotty_2.0.0-alpha.3_linux_amd64.tar.gz
+RUN wget https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+    tar -zxvf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+    chmod +x gotty && \
+    rm -rf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+    mv gotty /usr/local/bin/
 
 RUN git clone https://github.com/hpcaitech/ColossalAI.git && \
     cd ColossalAI/examples/language/grok-1 && \
