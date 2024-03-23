@@ -16,7 +16,7 @@ RUN wget https://github.com/xai-org/grok-1/raw/main/tokenizer.model
 
 WORKDIR /ColossalAI/examples/language/grok-1
 
-ADD entrypoint.sh
-ADD entrypoint.py
+ADD entrypoint.sh .
+ADD entrypoint.py .
 
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
