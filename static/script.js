@@ -1,18 +1,18 @@
-const infer = async (text) => {
-  const inferResponse = await fetch(`infer_t5?input=${text}`);
+const inference = async (text) => {
+  const inferResponse = await fetch(`infer?input=${text}`);
   const inferJson = await inferResponse.json();
   return inferJson.output;
 };
 
-const t5_Form = document.getElementById("t5-form");
+const form = document.getElementById("form-container");
 
-t5_Form.addEventListener("submit", async (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const t5_Input = document.getElementById("t5-input");
-  const t5_Output = document.getElementById("t5-output");
+  const promptInput = document.getElementById("prompt-input");
+  const outputText = document.getElementById("output-text");
 
   try {
-    t5_Output.textContent = await infer(t5_Input.value);
+    outputText.textContent = await inference(promptInput.value);
   } catch (err) {
     console.error(err);
   }

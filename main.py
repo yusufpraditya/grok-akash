@@ -4,9 +4,6 @@ from sentencepiece import SentencePieceProcessor
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import os
-
-os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
 print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
 
@@ -23,10 +20,10 @@ app = FastAPI()
 
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
-@app.get("/infer_t5")
-def t5(text):
+@app.get("/infer")
+def inference(input):
   try:
-    input_ids = sp.encode(text)
+    input_ids = sp.encode(input)
     input_ids = torch.tensor([input_ids]).cuda()
     attention_mask = torch.ones_like(input_ids)
 

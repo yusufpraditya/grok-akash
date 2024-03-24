@@ -4,31 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grok</title>
+
+    <!-- Styling -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <script type="module" src="script.js"></script>
   </head>
   <body>
     <main>
-      <div class="form-block">
-        <h1>Grok</h1>
-        <p> Model:
-            <a href="https://huggingface.co/hpcai-tech/grok-1" rel="noreferrer" target="_blank" >Grok</a>
-        </p>
-        <div>
-          <form id="t5-form">
-              <div class="input-block">
-                <label for="t5-input">Text prompt:</label>
-                <textarea id="t5-input" rows="3">What is Artifical Intelligence?</textarea>
-              </div>
-              <button id="t5-submit">Submit</button>
-              <div>
-                <label for="t5-output">Results:</label>
-                <div id="t5-output"></div>
-              </div>
-            </form>
-        </div>
+      <div class="grok-logo">
+        <img src="grok-logo.png" alt="grok-logo">
       </div>
-
+      <div class="grok-container">
+        <p>
+          Model:
+          <a href="https://huggingface.co/hpcai-tech/grok-1" target="_blank"
+            >Grok-1</a
+          >
+        </p>
+        <form id="form-container">
+          <div class="output-container">
+            <div id="output-text"></div>
+          </div>
+          <div class="input-container">
+            <input id="prompt-input" type="text" placeholder="Input your prompt" autocomplete="off"></input>
+            <button id="submit-button">Submit</button>
+          </div>
+        </form>
+      </div>
     </main>
   </body>
 </html>
