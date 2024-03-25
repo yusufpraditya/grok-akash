@@ -14,7 +14,7 @@ is_downloaded = False
 
 while not is_downloaded:
   try:
-    snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False, resume_download=True, max_workers=64, revision="d34f045119ab9a385517721dbdb40ba2036a5d60")
+    snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=True, resume_download=True, max_workers=64, revision="d34f045119ab9a385517721dbdb40ba2036a5d60")
 
     bin_files = [file for file in os.listdir("./hpcai-tech/grok-1") if file.lower().endswith('.bin')]
 
