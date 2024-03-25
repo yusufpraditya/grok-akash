@@ -8,8 +8,6 @@ from huggingface_hub import snapshot_download
 import os
 import time
 
-print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
-
 MAX_NEW_TOKENS = int(os.environ.get("MAX_NEW_TOKENS", 100))
 
 is_downloaded = False
@@ -22,6 +20,8 @@ while not is_downloaded:
 
     if len(bin_files) == 65:
       is_downloaded = True
+      print("Download finished. Checkpoints will be loaded and takes about 10 minutes.")
+      print("If after 10 minutes it still looks 'stuck', try reloading Cloudmos.")
   except Exception as error:
     print(error)
     print("Retrying..")
@@ -38,8 +38,6 @@ model = AutoModelForCausalLM.from_pretrained(
 sp = SentencePieceProcessor(model_file="tokenizer.model")
 
 app = FastAPI()
-
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 @app.get("/infer")
 def inference(input):
@@ -64,6 +62,8 @@ def inference(input):
     return { "output": decoded_output }
   except:
     return { "output": "Error. Try again!" }
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 @app.get("/")
 def index() -> FileResponse:
