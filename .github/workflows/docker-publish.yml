@@ -45,5 +45,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }},cvpfus/grok-akash:0.10
+          tags: ${{ steps.meta.outputs.tags }},cvpfus/grok-akash:0.11
           labels: ${{ steps.meta.outputs.labels }}
