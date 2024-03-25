@@ -7,6 +7,9 @@ from fastapi.responses import FileResponse
 from huggingface_hub import snapshot_download
 import os
 import time
+import logging
+
+logging.basicConfig(level=logging.INFO, filename="grok.log",filemode="w", format="%(asctime)s %(levelname)s %(message)s")
 
 MAX_NEW_TOKENS = int(os.environ.get("MAX_NEW_TOKENS", 100))
 
@@ -22,7 +25,9 @@ while not is_downloaded:
       is_downloaded = True
       print("Download finished. Checkpoints will be loaded and takes about 10 minutes.")
       print("If after 10 minutes it still looks 'stuck', try reloading Cloudmos.")
+      logging.info("Download finished.")
   except Exception as error:
+    logging.error(error)
     print(error)
     print("Retrying..")
     time.sleep(5)
