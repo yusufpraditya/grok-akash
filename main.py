@@ -5,10 +5,13 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from huggingface_hub import snapshot_download
+import os
+
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
 print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
 
-snapshot_download(repo_id="hpcai-tech/grok-1", allow_patterns="*.bin", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False)
+snapshot_download(repo_id="hpcai-tech/grok-1", allow_patterns=["*.bin", "*.json"], local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False)
 
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
