@@ -11,7 +11,7 @@ print("After grok model downloaded, it will take 5-10 minutes to load checkpoint
 
 MAX_NEW_TOKENS = int(os.environ.get("MAX_NEW_TOKENS", 100))
 
-snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False, resume_download=True, max_workers=64)
+snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=True, resume_download=True, max_workers=64)
 
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
