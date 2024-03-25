@@ -4,7 +4,7 @@ WORKDIR /grok
 
 RUN apt-get update && \
     apt-get install wget -y && \
-    mkdir -p hpcai-tech/grok-1
+    mkdir -p grok-model
 
 RUN pip install --upgrade pip
 

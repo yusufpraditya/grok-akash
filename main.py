@@ -12,14 +12,15 @@ import logging
 logging.basicConfig(level=logging.INFO, filename="grok.log",filemode="w", format="%(asctime)s %(levelname)s %(message)s")
 
 MAX_NEW_TOKENS = int(os.environ.get("MAX_NEW_TOKENS", 100))
+MODEL_PATH = "./grok-model"
 
 is_downloaded = False
 
 while not is_downloaded:
   try:
-    snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=True, resume_download=True, max_workers=64, revision="d34f045119ab9a385517721dbdb40ba2036a5d60")
+    snapshot_download(repo_id="hpcai-tech/grok-1", local_dir=MODEL_PATH, local_dir_use_symlinks=False, resume_download=True, max_workers=4, revision="d34f045119ab9a385517721dbdb40ba2036a5d60")
 
-    bin_files = [file for file in os.listdir("./hpcai-tech/grok-1") if file.lower().endswith('.bin')]
+    bin_files = [file for file in os.listdir(MODEL_PATH) if file.lower().endswith('.bin')]
 
     if len(bin_files) == 65:
       is_downloaded = True
@@ -33,13 +34,19 @@ while not is_downloaded:
     time.sleep(5)
 
 torch.set_default_dtype(torch.bfloat16)
+
+logging.info("Loading model..")
+
 model = AutoModelForCausalLM.from_pretrained(
-    "./hpcai-tech/grok-1",
+    MODEL_PATH,
     trust_remote_code=True,
     device_map="auto",
     torch_dtype=torch.bfloat16,
     local_files_only=True
 )
+
+logging.info("Model loaded.")
+
 sp = SentencePieceProcessor(model_file="tokenizer.model")
 
 app = FastAPI()
