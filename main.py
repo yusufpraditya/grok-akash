@@ -7,9 +7,9 @@ from fastapi.responses import FileResponse
 from huggingface_hub import snapshot_download
 import os
 
-os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
-
 print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
+
+MAX_NEW_TOKENS = int(os.environ.get("MAX_NEW_TOKENS", 100))
 
 snapshot_download(repo_id="hpcai-tech/grok-1", allow_patterns=["*.bin", "*.json"], local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False)
 
@@ -35,7 +35,7 @@ def inference(input):
     attention_mask = torch.ones_like(input_ids)
 
     generate_kwargs = {
-      "max_new_tokens": 64
+      "max_new_tokens": MAX_NEW_TOKENS
     }
 
     inputs = {
