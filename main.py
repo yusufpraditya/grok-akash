@@ -6,12 +6,26 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from huggingface_hub import snapshot_download
 import os
+import time
 
 print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
 
 MAX_NEW_TOKENS = int(os.environ.get("MAX_NEW_TOKENS", 100))
 
-snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=True, resume_download=True, max_workers=64)
+is_downloaded = False
+
+while not is_downloaded:
+  try:
+    snapshot_download(repo_id="hpcai-tech/grok-1", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False, resume_download=True, max_workers=64, revision="d34f045119ab9a385517721dbdb40ba2036a5d60")
+
+    bin_files = [file for file in os.listdir("./hpcai-tech/grok-1") if file.lower().endswith('.bin')]
+
+    if len(bin_files) == 65:
+      is_downloaded = True
+  except Exception as error:
+    print(error)
+    print("Retrying..")
+    time.sleep(5)
 
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
