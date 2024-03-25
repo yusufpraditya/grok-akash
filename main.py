@@ -4,15 +4,19 @@ from sentencepiece import SentencePieceProcessor
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from huggingface_hub import snapshot_download
 
 print("After grok model downloaded, it will take 5-10 minutes to load checkpoints.")
 
+snapshot_download(repo_id="hpcai-tech/grok-1", allow_patterns="*.bin", local_dir="hpcai-tech/grok-1", local_dir_use_symlinks=False)
+
 torch.set_default_dtype(torch.bfloat16)
 model = AutoModelForCausalLM.from_pretrained(
-    "hpcai-tech/grok-1",
+    "./hpcai-tech/grok-1",
     trust_remote_code=True,
     device_map="auto",
     torch_dtype=torch.bfloat16,
+    local_files_only=True
 )
 sp = SentencePieceProcessor(model_file="tokenizer.model")
 
